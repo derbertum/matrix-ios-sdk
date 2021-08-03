@@ -25,11 +25,13 @@ extern NSString *const MXEncryptedAttachmentsErrorDomain;
 @interface MXEncryptedAttachments : NSObject
 
 + (void)encryptAttachment:(MXMediaLoader *)uploader
+                 mimeType:(NSString *)mimeType
                  localUrl:(NSURL *)url
                   success:(void(^)(MXEncryptedContentFile *result))success
                   failure:(void(^)(NSError *error))failure;
 
 + (void)encryptAttachment:(MXMediaLoader *)uploader
+                 mimeType:(NSString *)mimeType
                      data:(NSData *)data
                   success:(void(^)(MXEncryptedContentFile *result))success
                   failure:(void(^)(NSError *error))failure;
@@ -49,6 +51,7 @@ extern NSString *const MXEncryptedAttachmentsErrorDomain;
  @param failure a block called when the operation fails.
  */
 + (void)encryptAttachment:(MXMediaLoader *)uploader
+                 mimeType:(NSString *)mimeType
              dataCallback:(NSData *(^)(void))dataCallback
                   success:(void(^)(MXEncryptedContentFile *result))success
                   failure:(void(^)(NSError *error))failure;
