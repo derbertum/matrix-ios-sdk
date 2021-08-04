@@ -1626,7 +1626,7 @@ NSInteger const kMXRoomAlreadyJoinedErrorCode = 9001;
 
             }];
 
-            [MXEncryptedAttachments encryptAttachment:uploader mimeType:mimetype localUrl:fileLocalURL success:^(MXEncryptedContentFile *result) {
+            [MXEncryptedAttachments encryptAttachment:uploader mimeType:mimeType localUrl:fileLocalURL success:^(MXEncryptedContentFile *result) {
 
                 // Do not go further if the orignal request has been cancelled
                 if (roomOperation.isCancelled)
