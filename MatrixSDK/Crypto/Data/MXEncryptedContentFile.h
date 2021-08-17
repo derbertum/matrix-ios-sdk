@@ -53,6 +53,12 @@
 @property (nonatomic) NSString *url;
 
 /**
+ The mimetype of the content.
+ */
+@property (nonatomic) NSString *mimetype;
+
+
+/**
  The Key object.
  */
 @property (nonatomic) MXEncryptedContentKey *key;

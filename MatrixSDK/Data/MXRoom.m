@@ -1023,7 +1023,7 @@ NSInteger const kMXRoomAlreadyJoinedErrorCode = 9001;
             }];
 
             NSURL *localURL = [NSURL URLWithString:cacheFilePath];
-            [MXEncryptedAttachments encryptAttachment:uploader localUrl:localURL success:^(MXEncryptedContentFile *result) {
+            [MXEncryptedAttachments encryptAttachment:uploader mimeType:mimetype  localUrl:localURL success:^(MXEncryptedContentFile *result) {
 
                 [msgContent removeObjectForKey:@"url"];
                 msgContent[@"file"] = result.JSONDictionary;
@@ -1066,7 +1066,7 @@ NSInteger const kMXRoomAlreadyJoinedErrorCode = 9001;
                     NSData *pngImageData = [newRep representationUsingType:NSPNGFileType properties:@{}];
 #endif
 
-                    [MXEncryptedAttachments encryptAttachment:thumbUploader data:pngImageData success:^(MXEncryptedContentFile *result) {
+                    [MXEncryptedAttachments encryptAttachment:thumbUploader mimeType:@"image/png" data:pngImageData success:^(MXEncryptedContentFile *result) {
 
                         msgContent[@"info"][@"thumbnail_file"] = result.JSONDictionary;
 
@@ -1246,7 +1246,7 @@ NSInteger const kMXRoomAlreadyJoinedErrorCode = 9001;
 
             if (self.mxSession.crypto && self.summary.isEncrypted)
             {
-                [MXEncryptedAttachments encryptAttachment:thumbUploader data:videoThumbnailData success:^(MXEncryptedContentFile *result) {
+                [MXEncryptedAttachments encryptAttachment:thumbUploader mimeType:@"image/jpeg" data:videoThumbnailData success:^(MXEncryptedContentFile *result) {
 
                     // Update thumbnail URL with the actual mxc: URL
                     msgContent[@"info"][@"thumbnail_file"] = result.JSONDictionary;
@@ -1292,7 +1292,7 @@ NSInteger const kMXRoomAlreadyJoinedErrorCode = 9001;
                         }
                     }];
 
-                    [MXEncryptedAttachments encryptAttachment:videoUploader localUrl:convertedLocalURL success:^(MXEncryptedContentFile *result) {
+                    [MXEncryptedAttachments encryptAttachment:videoUploader mimeType:mimetype  localUrl:convertedLocalURL success:^(MXEncryptedContentFile *result) {
 
                         // Do not go further if the orignal request has been cancelled
                         if (roomOperation.isCancelled)
@@ -1626,7 +1626,7 @@ NSInteger const kMXRoomAlreadyJoinedErrorCode = 9001;
 
             }];
 
-            [MXEncryptedAttachments encryptAttachment:uploader localUrl:fileLocalURL success:^(MXEncryptedContentFile *result) {
+            [MXEncryptedAttachments encryptAttachment:uploader mimeType:mimeType localUrl:fileLocalURL success:^(MXEncryptedContentFile *result) {
 
                 // Do not go further if the orignal request has been cancelled
                 if (roomOperation.isCancelled)

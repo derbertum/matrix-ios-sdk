@@ -32,6 +32,7 @@ NSString *const MXEncryptedAttachmentsErrorDomain = @"MXEncryptedAttachmentsErro
 #pragma mark encrypt
 
 + (void)encryptAttachment:(MXMediaLoader *)uploader
+                 mimeType:(NSString *)mimeType
                  localUrl:(NSURL *)url
                   success:(void(^)(MXEncryptedContentFile *result))success
                   failure:(void(^)(NSError *error))failure
@@ -45,7 +46,7 @@ NSString *const MXEncryptedAttachmentsErrorDomain = @"MXEncryptedAttachmentsErro
         
     }
     
-    [MXEncryptedAttachments encryptAttachment:uploader dataCallback:^NSData *{
+    [MXEncryptedAttachments encryptAttachment:uploader mimeType:mimeType dataCallback:^NSData *{
         
         return [fileHandle readDataOfLength:4096];
         
@@ -55,13 +56,14 @@ NSString *const MXEncryptedAttachmentsErrorDomain = @"MXEncryptedAttachmentsErro
 }
 
 + (void)encryptAttachment:(MXMediaLoader *)uploader
+                 mimeType:(NSString *)mimeType
                      data:(NSData *)data
                   success:(void(^)(MXEncryptedContentFile *result))success
                   failure:(void(^)(NSError *error))failure
 {
     __block bool dataGiven = false;
     
-    [MXEncryptedAttachments encryptAttachment:uploader dataCallback:^NSData *{
+    [MXEncryptedAttachments encryptAttachment:uploader mimeType:mimeType dataCallback:^NSData *{
         
         if (dataGiven) return nil;
         
@@ -72,6 +74,7 @@ NSString *const MXEncryptedAttachmentsErrorDomain = @"MXEncryptedAttachmentsErro
 }
 
 + (void)encryptAttachment:(MXMediaLoader *)uploader
+                 mimeType:(NSString *)mimeType
              dataCallback:(NSData *(^)(void))dataCallback
                   success:(void(^)(MXEncryptedContentFile *result))success
                   failure:(void(^)(NSError *error))failure
@@ -165,6 +168,7 @@ NSString *const MXEncryptedAttachmentsErrorDomain = @"MXEncryptedAttachmentsErro
         MXEncryptedContentFile *encryptedContentFile = [[MXEncryptedContentFile alloc] init];
         encryptedContentFile.v = @"v2";
         encryptedContentFile.url = url;
+        encryptedContentFile.mimetype = mimeType;
         encryptedContentFile.key = encryptedContentKey;
         encryptedContentFile.iv = [MXBase64Tools base64ToUnpaddedBase64:[iv base64EncodedStringWithOptions:0]];
         encryptedContentFile.hashes = @{
