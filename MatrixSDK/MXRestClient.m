@@ -87,12 +87,7 @@ MXAuthAction;
 
 #pragma mark - MXRestClient
 @interface MXRestClient ()
-{
-    /**
-     HTTP client to the home server.
-     */
-    MXHTTPClient *httpClient;
-    
+{    
     /**
      HTTP client to the antivirus server.
      */
@@ -107,7 +102,7 @@ MXAuthAction;
 @end
 
 @implementation MXRestClient
-@synthesize credentials, apiPathPrefix, contentPathPrefix, completionQueue, antivirusServerPathPrefix;
+@synthesize credentials, apiPathPrefix, contentPathPrefix, completionQueue, antivirusServerPathPrefix, httpClient;
 
 -(id)initWithHomeServer:(NSString *)homeserver andOnUnrecognizedCertificateBlock:(MXHTTPClientOnUnrecognizedCertificate)onUnrecognizedCertBlock
 {

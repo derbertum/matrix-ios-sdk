@@ -124,7 +124,17 @@ typedef MXHTTPOperation* (^MXRestClientIdentityServerAccessTokenHandler)(void (^
     - the Matrix content repository manage by this home server
     - the specified Matrix identity server
  */
-@interface MXRestClient : NSObject
+@interface MXRestClient : NSObject {
+    /**
+     HTTP client to the home server.
+     */
+    MXHTTPClient *httpClient;
+}
+
+/**
+ HTTP client to the home server.
+ */
+@property (nonatomic, readonly) MXHTTPClient *httpClient;
 
 /**
  Credentials for the Matrix Client-Server API.
